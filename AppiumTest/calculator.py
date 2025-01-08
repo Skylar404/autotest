@@ -35,7 +35,7 @@ class calculator:
 
 
         # driver.find_element(AppiumBy.CLASS_NAME,'android.view.View').click()
-        sleep(10)
+        # sleep(10)
             #完成一个 计算 3+9 ，结果 再乘以5 的自动化功能. 最后判断计算结果是否为60，如果是，测试通过；否则测试不通过
 
         agree=self.driver.find_elements(AppiumBy.ID,'user_privacy_ok')
@@ -62,19 +62,33 @@ class calculator:
         equal.click()
 
         code= 'new UiSelector().text("支出")'
-        ele=self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,code)
+        self.driver.find_element(AppiumBy.ANDROID_UIAUTOMATOR,code).click()
 
+        sleep(3)
 
+        res=self.driver.find_elements(AppiumBy.ID,'review_record_result_text')
 
-    
-        return ele.text
-
+                
+        return res[-1].text
         sleep(10)
         input('input enter')
 
+
+    def btn_cancel(self):
+        ele=self.driver.find_element(AppiumBy.ID,'activity_main_btn_cancel')
+        ele.click()
+        sleep(2)
+
+    def btn_clear(self):
+        ele=self.driver.find_element(AppiumBy.ID,'activity_main_btn_delet')
+        ele.click()
+        sleep(2)
+
 CA=calculator()
-puls=CA.Simplecalculate('+',3,9)
 
-result=CA.Simplecalculate('*',None,5)
+if __name__=='__main__':
+    puls=CA.Simplecalculate('+',3,9)
+    CA.btn_cancel()
+    result=CA.Simplecalculate('*',None,5)
 
-print(result)
+    print(result)
